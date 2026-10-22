@@ -1,0 +1,8 @@
+---
+# cPanel Git Version Control: "Deploy HEAD Commit" copies the site into the web root.
+# Copies over existing files; never deletes anything else in public_html (e.g. .well-known for SSL).
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/cp -R site/. $DEPLOYPATH
+    - /bin/find $DEPLOYPATH -type f -newer .cpanel.yml -exec chmod 644 {} \;
